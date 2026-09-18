@@ -1,0 +1,20 @@
+pregnancy_fields <- c(
+  "record_id",
+  "redcap_repeat_instance",
+  "pregnancy_known",
+  "pregnancy_reported",
+  "intrapartum_complications___1",
+  "intrapartum_complications___2",
+  "intrapartum_complications___3",
+  "intrapartum_complications___4",
+  "intrapartum_complications___5",
+  "intrapartum_complications___0",
+  "intrapartum_congen",
+  "intrapartum_other",
+  "preg_result",
+  "preg_gest_bin",
+  "pregresult_gest",
+  "preg_term",
+  "pregresult_date",
+  "preg_notes"
+)
