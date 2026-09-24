@@ -28,10 +28,12 @@ Once installed, the main function is `organize`:
 
 ``` r
 
-CANIMPACT::organize(
-  export_path = "path/to/redcap_export.csv",
-  output_dir = "path/to/output_directory"
-)
+raw_data <- read.csv("path/to/redcap_export.csv")
+
+# Alternatively, if you have a REDCap API token:
+raw_data <- CANIMPACT::from_api(Sys.getenv("REDCAP_TOKEN"))
+
+CANIMPACT::organize(raw_data)
 ```
 
 This will create:
@@ -46,13 +48,14 @@ The processed data are also returned as a named list:
 ``` r
 
 data <- CANIMPACT::organize(
-  export_path = "path/to/redcap_export.csv",
-  output_dir = "path/to/output"
+  data = raw_data,
+  output_dir = NULL
 )
 
 data$demographics
 data$visits
 data$pex
+...
 ```
 
 ## Contact Information
@@ -72,6 +75,8 @@ me at <josh.dyce@hli.ubc.ca>.
   : Add spirometry percent predicted values
 - [`flag_missing_data()`](https://joshd898.github.io/CAN-IMPACT/reference/flag_missing_data.md)
   : Flag missing data
+- [`from_api()`](https://joshd898.github.io/CAN-IMPACT/reference/from_api.md)
+  : USe the REDCap API to load a raw export
 - [`get_baseline_char()`](https://joshd898.github.io/CAN-IMPACT/reference/get_baseline_char.md)
   : Extract baseline characteristics data
 - [`get_demographics()`](https://joshd898.github.io/CAN-IMPACT/reference/get_demographics.md)

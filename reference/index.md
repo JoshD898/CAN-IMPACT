@@ -10,6 +10,8 @@
   : Add spirometry percent predicted values
 - [`flag_missing_data()`](https://joshd898.github.io/CAN-IMPACT/reference/flag_missing_data.md)
   : Flag missing data
+- [`from_api()`](https://joshd898.github.io/CAN-IMPACT/reference/from_api.md)
+  : USe the REDCap API to load a raw export
 - [`get_baseline_char()`](https://joshd898.github.io/CAN-IMPACT/reference/get_baseline_char.md)
   : Extract baseline characteristics data
 - [`get_demographics()`](https://joshd898.github.io/CAN-IMPACT/reference/get_demographics.md)

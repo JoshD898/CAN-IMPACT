@@ -15,14 +15,14 @@ The pipeline:
 ## Usage
 
 ``` r
-organize(export_path, output_dir = ".")
+organize(data, output_dir = ".")
 ```
 
 ## Arguments
 
-- export_path:
+- data:
 
-  Character string giving the path to the REDCap CSV export.
+  A data frame containing the REDCap export.
 
 - output_dir:
 
