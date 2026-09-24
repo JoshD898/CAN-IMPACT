@@ -14,7 +14,7 @@
 split_data <- function(export) {
   list(
     demographics = get_demographics(export),
-    baseline_characteristsics = get_baseline_char(export),
+    baseline_characteristics = get_baseline_char(export),
     visits = get_visits(export),
     pex = get_pex(export),
     medications = get_medications(export),
@@ -62,11 +62,20 @@ get_demographics <- function(export) {
 #'
 #' @param export A data frame containing the raw REDCap export.
 #'
-#' @return A data frame of baseline characteristics data.
+#' @return A data frame of baseline characteristics data (everything not included in follow up visits)
 get_baseline_char <- function(export) {
   export |>
     dplyr::filter(redcap_event_name == "visit_1_baseline_arm_1") |>
-    dplyr::select(dplyr::all_of(baseline_char_fields)) |>
+    dplyr::select(dplyr::all_of(c(
+      "record_id",
+      "baseline_modulator",
+      "start_date_of_current_modu",
+      "baseline_modulator_name",
+      setdiff(
+        c(base_clin_rev_fields, base_clin_test_fields),
+        c(names(clin_test_mapping), names(clin_rev_mapping))
+      )
+    ))) |>
     recode_columns(baseline_char_labels)
 }
 

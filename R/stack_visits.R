@@ -9,23 +9,23 @@
 #' field names before combining, so that each clinical variable ends up
 #' in a single, consistently named column across all visits.
 #'
-#' @param visits A data frame containing the raw REDCap export.
+#' @param export A data frame containing the raw REDCap export.
 #'
 #' @return A data frame combining baseline and follow-up visits into a
 #'   single set of rows, with clinical review and clinical test fields
 #'   unified under common column names
-stack_visits <- function(visits) {
+stack_visits <- function(export) {
   # Rename these because dplyr::rename needs them in opposite order
   clin_rev_mapping_rename <- setNames(names(clin_rev_mapping), clin_rev_mapping)
   clin_test_mapping_rename <- setNames(names(clin_test_mapping), clin_test_mapping)
 
-  base_df <- visits |>
+  base_df <- export |>
     dplyr::filter(redcap_event_name == "visit_1_baseline_arm_1") |>
     dplyr::select(-clin_test_fields, -clin_rev_fields) |>
     dplyr::rename(!!!clin_rev_mapping_rename, !!!clin_test_mapping_rename) |>
     dplyr::mutate(visit_number = "Baseline")
 
-  fu_df <- visits |>
+  fu_df <- export |>
     dplyr::filter(redcap_event_name == "subsequent_visits_arm_1")
 
   dplyr::bind_rows(base_df, fu_df)
