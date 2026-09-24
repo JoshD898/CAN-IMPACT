@@ -1,11 +1,28 @@
+#' Add ETI start date and time from ETI to spirometry
+#'
+#' Adds `eti_start_date` to `demographics` and
+#' `months_from_eti_to_spirometry` to `visits`.
+#'
+#' @section How `eti_start_date` is determined:
+#' Each record gets one ETI start date:
+#'
+#' 1. If the baseline characteristics list ETI as the current modulator with a
+#'    start date, that date is used.
+#' 2. Otherwise, the earliest modulator change date on a visit where the
+#'    modulator is ETI is used.
+#'
+#' The baseline date always takes priority. Records with neither get `NA`.
+#'
+#' @param split_data A named list of data frames, one per REDCap tab.
+#' @return `split_data` with the new columns added.
 add_eti_dates <- function(split_data) {
   split_data |>
     add_eti_start_date() |>
     add_time_from_eti()
 }
 
-
-
+#' @inheritParams add_eti_dates
+#' @noRd
 add_eti_start_date <- function(split_data) {
   demographics <- split_data[["demographics"]]
   baseline_char <- split_data[["baseline_characteristics"]]
@@ -54,7 +71,8 @@ add_eti_start_date <- function(split_data) {
   split_data
 }
 
-# Add `time_from_eti_to_spirometry` column to the visit tab
+#' @inheritParams add_eti_dates
+#' @noRd
 add_time_from_eti <- function(split_data) {
   visits <- split_data[["visits"]]
   demographics <- split_data[["demographics"]] |>

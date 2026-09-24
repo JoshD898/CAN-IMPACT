@@ -53,18 +53,18 @@ demographics_labels <- list(
   site = list(
     fields = "redcap_data_access_group",
     values = c(
-      "stpauls_hospital" = "St. Paul’s Hospital",
-      "bc_childrens_hospi" = "BC Children’s Hospital",
+      "stpauls_hospital" = "St. Paul\u2019s Hospital",
+      "bc_childrens_hospi" = "BC Children\u2019s Hospital",
       "the_hospital_for_s" = "SickKids",
-      "stmicheals_hospita" = "St. Michael’s Hospital",
+      "stmicheals_hospita" = "St. Michael\u2019s Hospital",
       "mcgill_universityb" = "MUHC",
       "mcgill_university" = "MUHC",
       "foothills_hospital" = "Foothills Hospital",
       "institut_universit" = "IUCPQ",
-      "jim_pattison_child" = "Jim Pattison Children’s Hospital",
-      "hoteldieu_de_montr" = "Hôtel-Dieu de Montréal",
+      "jim_pattison_child" = "Jim Pattison Children\u2019s Hospital",
+      "hoteldieu_de_montr" = "H\u00f4tel-Dieu de Montr\u00e9al",
       "qe_ii_health_scien" = "QEII Health Sciences Centre",
-      "stollery_childrens" = "Stollery Children’s Hospital",
+      "stollery_childrens" = "Stollery Children\u2019s Hospital",
       "university_of_albe" = "University of Alberta Hospital"
     )
   )

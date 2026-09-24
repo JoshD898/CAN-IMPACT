@@ -5,11 +5,6 @@
 qc_logger <- function() {
   entries <- list()
 
-  #' @param tab Table name.
-  #' @param record_id Record ID.
-  #' @param redcap_repeat_instance Repeat instance number.
-  #' @param description Description of the QC issue.
-  #' @param action Action taken.
   add <- function(tab, record_id, redcap_repeat_instance, visit_number, description, action) {
     entries[[length(entries) + 1]] <<- data.frame(
       tab = tab,
@@ -21,7 +16,6 @@ qc_logger <- function() {
     )
   }
 
-  #' @param output_dir Directory to save the QC log to
   save_log <- function(output_dir) {
     log <- dplyr::bind_rows(entries)
     write.csv(log, file.path(output_dir, "qc_log.csv"), row.names = FALSE)

@@ -1,10 +1,21 @@
+#' Add spirometry percent predicted values
+#'
+#' Adds percent predicted values using the race-neutral GLI global (2022)
+#' equations, as implemented by [rspiro::pctpred_GLIgl()]: `fev1_pctpred` and
+#' `fvc_pctpred` on `visits`, and `best_fev1_pctpred` on
+#' `baseline_characteristics`. Requires the age columns from `add_ages()`.
+#'
+#' @param split_data A named list of data frames, one per REDCap tab.
+#' @return `split_data` with the percent predicted columns added.
+#' @references \url{https://cran.r-project.org/web/packages/rspiro/refman/rspiro.html}
 add_spirometry <- function(split_data) {
   split_data |>
     add_visit_spirometry() |>
     add_baseline_best_fev1()
 }
 
-
+#' @inheritParams add_spirometry
+#' @noRd
 add_visit_spirometry <- function(split_data) {
   demographics <- split_data[["demographics"]] |>
     dplyr::select(c("record_id", "sex"))
@@ -40,7 +51,8 @@ add_visit_spirometry <- function(split_data) {
 }
 
 
-
+#' @inheritParams add_spirometry
+#' @noRd
 add_baseline_best_fev1 <- function(split_data) {
   demographics <- split_data[["demographics"]] |>
     dplyr::select(c("record_id", "sex"))

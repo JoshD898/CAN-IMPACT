@@ -1,3 +1,23 @@
+#' Organize and quality-control REDCap export data
+#'
+#' The pipeline:
+#' \itemize{
+#'   \item Splits the raw export into separate data tabs.
+#'   \item Converts raw spirometry measurements to percent predicted.
+#'   \item Parses the ETI start date and calculates the time from ETI start
+#'     to each visit, rather than relying solely on visit labels.
+#'   \item Performs data quality checks for missing or impossible values,
+#'     with detailed logging of everything flagged.
+#' }
+#'
+#' @param export_path Character string giving the path to the REDCap CSV export.
+#' @param output_dir Character string giving the directory where the organized
+#'   Excel workbook and QC log should be saved. Defaults to the current
+#'   directory. Set to `NULL` to skip writing output files.
+#'
+#' @return A named list of organized data frames.
+#'
+#' @export
 organize <- function(export_path, output_dir = ".") {
   logger <- qc_logger()
 

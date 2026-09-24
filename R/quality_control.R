@@ -1,3 +1,11 @@
+#' Run data QC checks
+#'
+#' Removes empty rows, sets impossible values to NA, and flags missing data.
+#' All changes and flags are recorded in the logger.
+#'
+#' @param split_data A named list of data frames, one per REDCap tab.
+#' @param logger A `qc_logger` object.
+#' @return `split_data` with the QC changes applied.
 run_data_qc <- function(split_data, logger) {
   split_data |>
     remove_empty_rows(logger) |>
@@ -5,7 +13,13 @@ run_data_qc <- function(split_data, logger) {
     flag_missing_data(logger)
 }
 
-#' This must be run AFTER spirometry fields have been added
+#' Flag high spirometry percent predicted values
+#'
+#' Logs any percent predicted value >= 150. Data are not changed.
+#' This must be run AFTER spirometry fields have been added.
+#'
+#' @inheritParams run_data_qc
+#' @return `split_data`, unchanged.
 run_spirometry_qc <- function(split_data, logger) {
   fields <- list(
     visits = c("fev1_pctpred", "fvc_pctpred"),
@@ -37,7 +51,13 @@ run_spirometry_qc <- function(split_data, logger) {
   split_data
 }
 
-
+#' Remove empty rows
+#'
+#' Drops rows in every tab where all fields other than the identifiers are
+#' blank, 0, or NA. Dropped rows are logged.
+#'
+#' @inheritParams run_data_qc
+#' @return `split_data` with empty rows removed.
 remove_empty_rows <- function(split_data, logger) {
   is_empty <- function(row) all(row == "" | row == "0" | is.na(row))
 
@@ -66,9 +86,13 @@ remove_empty_rows <- function(split_data, logger) {
   split_data
 }
 
-
-
-
+#' Flag missing data
+#'
+#' Logs blank, 0, or NA values in the required fields listed in
+#' `qc_completion_fields`. Data are not changed.
+#'
+#' @inheritParams run_data_qc
+#' @return `split_data`, unchanged.
 flag_missing_data <- function(split_data, logger) {
   for (tab in names(qc_completion_fields)) {
     df <- split_data[[tab]]
@@ -94,6 +118,13 @@ flag_missing_data <- function(split_data, logger) {
   split_data
 }
 
+#' Remove impossible values
+#'
+#' Sets numeric values outside a valid range to NA and logs each change.
+#' Ranges are defined in the `rules` table inside the function.
+#'
+#' @inheritParams run_data_qc
+#' @return `split_data` with out-of-range values set to NA.
 remove_impossible_values <- function(split_data, logger) {
   rules <- tibble::tribble(
     ~tab_name,                  ~field,              ~min, ~max,
@@ -136,51 +167,10 @@ remove_impossible_values <- function(split_data, logger) {
   split_data
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#' Get repeat instance numbers
+#'
+#' @param df A data frame from one REDCap tab.
+#' @return The `redcap_repeat_instance` column, or NA for each row if absent.
 get_repeat_instances <- function(df) {
   if ("redcap_repeat_instance" %in% names(df)) {
     df$redcap_repeat_instance
@@ -189,6 +179,10 @@ get_repeat_instances <- function(df) {
   }
 }
 
+#' Get visit numbers
+#'
+#' @inheritParams get_repeat_instances
+#' @return The `visit_number` column, or NA for each row if absent.
 get_visit_numbers <- function(df) {
   if ("visit_number" %in% names(df)) {
     df$visit_number

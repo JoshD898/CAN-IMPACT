@@ -9,8 +9,6 @@
 #' @return A named list of data frames: `demographics`,
 #'   `baseline_characteristsics`, `visits`, `pex`, `medications`,
 #'   `side_effects`, and `pregnancy`.
-#'
-#' @export
 split_data <- function(export) {
   list(
     demographics = get_demographics(export),

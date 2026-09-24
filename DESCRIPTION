@@ -1,16 +1,24 @@
 Package: CANIMPACT
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Data Preprocessing Pipelie for CAN-IMPACT
+Version: 1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Josh", "Dyce",
+      email = "jpdyce@gmail.com",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: Internal package intended to aid in the analysis of data from
+  the CAN-IMPACT study.
 Encoding: UTF-8
 LazyData: true
+Config/roxygen2/version: 8.1.0
+License: MIT + file LICENSE
+Imports:
+    dplyr,
+    lubridate,
+    openxlsx,
+    rspiro,
+    tibble
+URL: https://joshd898.github.io/CAN-IMPACT/
