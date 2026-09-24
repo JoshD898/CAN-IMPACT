@@ -4,10 +4,10 @@
 \alias{organize}
 \title{Organize and quality-control REDCap export data}
 \usage{
-organize(export_path, output_dir = ".")
+organize(data, output_dir = ".")
 }
 \arguments{
-\item{export_path}{Character string giving the path to the REDCap CSV export.}
+\item{data}{A data frame containing the REDCap export.}
 
 \item{output_dir}{Character string giving the directory where the organized
 Excel workbook and QC log should be saved. Defaults to the current

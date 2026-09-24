@@ -24,10 +24,12 @@ remotes::install_github("JoshD898/CAN-IMPACT")
 Once installed, the main function is `organize`:
 
 ```r
-CANIMPACT::organize(
-  export_path = "path/to/redcap_export.csv",
-  output_dir = "path/to/output_directory"
-)
+raw_data <- read.csv("path/to/redcap_export.csv")
+
+# Alternatively, if you have a REDCap API token:
+raw_data <- CANIMPACT::from_api(Sys.getenv("REDCAP_TOKEN"))
+
+CANIMPACT::organize(raw_data)
 ```
 This will create:
 
@@ -38,13 +40,14 @@ The processed data are also returned as a named list:
 
 ```r
 data <- CANIMPACT::organize(
-  export_path = "path/to/redcap_export.csv",
-  output_dir = "path/to/output"
+  data = raw_data,
+  output_dir = NULL
 )
 
 data$demographics
 data$visits
 data$pex
+...
 ```
 
 ## Contact Information

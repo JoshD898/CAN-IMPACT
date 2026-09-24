@@ -10,7 +10,7 @@
 #'     with detailed logging of everything flagged.
 #' }
 #'
-#' @param export_path Character string giving the path to the REDCap CSV export.
+#' @param data A data frame containing the REDCap export.
 #' @param output_dir Character string giving the directory where the organized
 #'   Excel workbook and QC log should be saved. Defaults to the current
 #'   directory. Set to `NULL` to skip writing output files.
@@ -18,10 +18,12 @@
 #' @return A named list of organized data frames.
 #'
 #' @export
-organize <- function(export_path, output_dir = ".") {
+organize <- function(data, output_dir = ".") {
   logger <- qc_logger()
 
-  result <- read.csv(export_path, colClasses = "character") |>
+  data[] <- lapply(data, as.character)
+
+  result <- data |>
     split_data() |>
     add_ages() |>
     add_eti_dates() |>

@@ -20,5 +20,6 @@ Imports:
     lubridate,
     openxlsx,
     rspiro,
-    tibble
+    tibble,
+    httr2
 URL: https://joshd898.github.io/CAN-IMPACT/
