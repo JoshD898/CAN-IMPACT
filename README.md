@@ -16,7 +16,7 @@ The package can be installed and updated directly from GitHub using `remotes`:
 
 ```r
 install.packages("remotes")
-remotes::install_github("joshd898/CANIMPACT")
+remotes::install_github("JoshD898/CAN-IMPACT")
 ```
 
 ## Example Usage
