@@ -4,10 +4,12 @@
 \alias{from_api}
 \title{USe the REDCap API to load a raw export}
 \usage{
-from_api(token)
+from_api(token, save_path = NULL)
 }
 \arguments{
 \item{token}{API token to use}
+
+\item{save_path}{Path to save the export to (must end in .csv). Default is `NULL`.}
 }
 \value{
 A data frame of the raw export data
