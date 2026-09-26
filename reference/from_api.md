@@ -5,7 +5,7 @@ USe the REDCap API to load a raw export
 ## Usage
 
 ``` r
-from_api(token)
+from_api(token, save_path = NULL)
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ from_api(token)
 - token:
 
   API token to use
+
+- save_path:
+
+  Path to save the export to (must end in .csv). Default is \`NULL\`.
 
 ## Value
 
