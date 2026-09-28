@@ -87,6 +87,13 @@ add_time_from_eti <- function(split_data) {
           lubridate::ymd(date_of_spirometry)
         ),
         unit = "months"
+      ),
+      months_from_eti_to_blood_collection = lubridate::time_length(
+        lubridate::interval(
+          lubridate::ymd(eti_start_date),
+          lubridate::ymd(blood_collection_date)
+        ),
+        unit = "months"
       )
     ) |>
     dplyr::select(-eti_start_date)
